@@ -44,11 +44,25 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_145459) do
 
   create_table "settings", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "time_zone", default: "Pacific Time (US & Canada)", null: false
+    t.string "time_zone", default: "Eastern Time (US & Canada)", null: false
+    t.date "start_date"
+    t.integer "frequency", default: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "measurement_system", default: "imperial", null: false
     t.index ["user_id"], name: "index_settings_on_user_id"
+  end
+
+  create_table "tips", force: :cascade do |t|
+    t.decimal "total_amount", precision: 10, scale: 2
+    t.decimal "personal_payout", precision: 10, scale: 2
+    t.integer "split"
+    t.string "location"
+    t.date "occurred_on", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_tips_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -72,5 +86,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_145459) do
   add_foreign_key "exercise_entries", "users"
   add_foreign_key "food_entries", "users"
   add_foreign_key "medication_entries", "users"
+  add_foreign_key "tips", "users"
   add_foreign_key "water_entries", "users"
 end

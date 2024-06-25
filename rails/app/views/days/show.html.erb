@@ -3,9 +3,9 @@
 
 <div class="grid md:grid-cols-2 gap-4 sm:gap-8">
   <div class="space-y-4 sm:space-y-8">
-    <%= render "shared/components/list", title: "Exercise", path: new_exercise_entry_path(date: @date) do %>
-      <% @exercise_entries.each do |entry| %>
-        <%= render "shared/components/list/item", title: entry.name, href: edit_exercise_entry_path(entry) %>
+    <%= render "shared/components/list", title: "Tips today", path: new_tip_path(date: @date) do %>
+      <% @tips.each do |entry| %>
+        <%= render "shared/components/list/item", title: "#{entry.personal_payout} at #{entry.location}" , href: edit_tip_path(entry) %>
       <% end %>
     <% end %>
 

@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :medication_entries, dependent: :destroy
   has_many :water_entries, dependent: :destroy
   has_many :food_entries, dependent: :destroy
+  has_many :tips, dependent: :destroy
 
   has_one :settings, dependent: :destroy, class_name: "Setting"
 

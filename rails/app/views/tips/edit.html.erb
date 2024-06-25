@@ -1,0 +1,6 @@
+<% content_for :title, "Edit tip amount" %>
+
+
+<%= render "form", entry: @entry, date: @entry.occurred_on %>
+    <%= link_to "delete", @entry, data: { "turbo-method": :delete,
+                                               turbo_confirm: "You sure?" } %>

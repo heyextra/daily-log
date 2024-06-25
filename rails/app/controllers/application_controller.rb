@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
   include Authentication
-  include HoneybadgerContext
+  # include HoneybadgerContext
 
   before_action :authenticate_user!
-  before_action :set_honeybadger_context
+  # before_action :set_honeybadger_context
 
   around_action :set_time_zone, if: :user_signed_in?
 

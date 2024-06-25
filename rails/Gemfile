@@ -34,3 +34,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "ice_cube", "~> 0.16.4"
+
+gem "pry", "~> 0.14.2"

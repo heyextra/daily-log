@@ -1,0 +1,42 @@
+<%# locals: (entry:, date:) %>
+
+<% if entry.errors.any? %>
+  <%= render "shared/components/form/errors", errors: entry.errors, name: "tip"  %>
+<% end %>
+
+<%= strada_form_with model: entry, html: {data: {"turbo-action": "replace"}}, class: "max-w-lg mx-auto" do |form| %>
+  <div data-controller="tip-calc" class="form-container">
+    <div class="form-group">
+      <%= form.label :total_amount, "Total Tip Out", class: "form-label" %>
+      <%= form.text_field :total_amount, data: { "tip-calc-target": "totalAmount" }, class: "form-input" %>
+    </div>
+        <div class="form-group">
+      <%= form.label :location, "Location", class: "form-label" %>
+      <%= form.text_field :location, class: "form-input" %>
+    </div>
+            <div class="form-group" data-tip-calc-target="split" >
+            <div class="radio-button">
+<%= form.radio_button :split, 1, data: { "tip-calc-target": "split" } %>
+<%= form.label :split_1, 1 %>
+<%= form.radio_button :split, 2, data: { "tip-calc-target": "split" } %>
+<%= form.label :split_2, 2 %>
+<%= form.radio_button :split, 3, data: { "tip-calc-target": "split" } %>
+<%= form.label :split_3, 3 %>
+<%= form.radio_button :split, 4, data: { "tip-calc-target": "split" } %>
+<%= form.label :split_4, 4 %>
+</div>
+    </div>
+     <div class="form-group">
+      <%= form.label :personal_payout, "Your Pay", class: "form-label" %>
+      <%= form.text_field :personal_payout, class: "form-input", data: { "tip-calc-target": "personalPayout" } %>
+    </div>
+    <div class="form-group">
+      <%= form.label :occurred_on, "When?", class: "form-label" %>
+      <%= form.date_field :occurred_on, value: date, class: "form-input" %>
+    </div>
+  </div>
+  <div class="form-buttons">
+    <%= form.submit "Save", class: "btn-primary" %>
+  
+  </div>
+<% end %>

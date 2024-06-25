@@ -9,8 +9,10 @@ Rails.application.routes.draw do
   resources :exercise_entries, only: %i[new create edit update]
   resources :food_entries, only: %i[new create edit update]
   resources :medication_entries, only: %i[new create edit update]
+  resources :tips, only: %i[new create edit update destroy]
   resources :users, only: %w[new create destroy]
   resources :water_entries, only: %i[new create]
+  resource :pay_period, only: [:show]
 
   resources :configurations, only: [] do
     get :ios, on: :collection

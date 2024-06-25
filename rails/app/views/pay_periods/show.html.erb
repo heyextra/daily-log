@@ -1,0 +1,26 @@
+<p>Total Tips Earned: <%= @tip_sum %></p>
+<% content_for :title, "#{@pay_period[:start].to_formatted_s(:full)} - #{@pay_period[:end].to_formatted_s(:full)}" %>
+<% content_for :header_navigation, render("pay_periods/navigation") %>
+
+<% (0..13).step(7) do |week_start| %>
+  <div class="bg-black text-white rounded-lg overflow-hidden shadow flex items-center justify-center text-sm font-medium leading-6">
+    Week <%= week_start.zero? ? 1 : 2 %>
+  </div>
+  <div class="grid md:grid-cols-5 gap-4 sm:gap-8">
+    <% (@date_range[week_start, 7] || []).each do |date| %>
+      <%= render "shared/components/list", title: date.to_formatted_s(:day_and_date), path: new_tip_path(date: date) do %>
+        <% (@period_tips[date] || []).each do |entry| %>
+          <%= render "shared/components/list/item", title: "#{entry.personal_payout} at #{entry.location || "unknown"}", href: edit_tip_path(entry) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+<% break if week_start >= @date_range.size - 7 %>
+<% end %>
+
+<%= link_to "Settings", settings_path,
+  "data-controller": "bridge--button",
+  "data-bridge-ios-image": "person.circle",
+  "data-bridge-side": "left",
+  class: "btn-secondary w-full mt-8 non-turbo-native:hidden"
+%>

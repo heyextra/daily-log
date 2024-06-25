@@ -7,6 +7,7 @@ class DaysController < ApplicationController
 
   def show
     @exercise_entries = current_user.exercise_entries.where(occurred_on: @date).order(:created_at)
+    @tips = current_user.tips.where(occurred_on: @date).order(:created_at)
     @medication_entries = current_user.medication_entries.where(occurred_on: @date).order(:created_at)
     @water = current_user.water_entries.where(occurred_on: @date).amounts.sum.convert_to(current_user.settings.water_unit)
     @food_entries = current_user.food_entries.where(occurred_on: @date).order(:created_at)

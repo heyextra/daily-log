@@ -35,6 +35,34 @@
       <%= form.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, {}, class: "form-select" %>
     </div>
   </div>
+       <fieldset class="form-group">
+      <%= form.label :start_date, class: "form-label" %>
+      <%= form.date_field :start_date, class: "form-select" %>
+
+      
+      <legend class="form-label">Pay Period Settings</legend>
+      <p class="form-text">Show entries in this system and set unit for new measurements.</p>
+      <div class="space-y-5 mt-4">
+        <div class="relative flex items-start">
+          <div class="flex h-6 items-center">
+            <%= form.radio_button :frequency, 1, class: "form-radio" %>
+          </div>
+          <div class="ml-3 text-sm leading-6">
+            <%= form.label "Weekly", class: "form-label" %>
+            <p id="small-description" class="text-gray-500">You get payed every week.</p>
+          </div>
+        </div>
+        <div class="relative flex items-start">
+          <div class="flex h-6 items-center">
+            <%= form.radio_button :frequency, 2, class: "form-radio" %>
+          </div>
+          <div class="ml-3 text-sm leading-6">
+            <%= form.label "Bi-Weekly", class: "form-label" %>
+            <p id="medium-description" class="text-gray-500">You get payed every two weeks.</p>
+          </div>
+        </div>
+      </div>
+    </fieldset>
   <div class="form-buttons">
     <%= form.submit "Save", class: "btn-primary" %>
   </div>
